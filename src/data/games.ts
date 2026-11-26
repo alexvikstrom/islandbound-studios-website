@@ -1,25 +1,26 @@
 import type { Game } from "../types/game";
 
 export const games: Game[] = [
+    // TODO: change rootplace id's to universe id's, change fetching in games.tsx accordingly.
     {
-        rootPlaceId: "76558904092080", // The forge
+        universeId: 7671049560, // The forge
     },
     {
-        rootPlaceId: "107778070777162", // Steal an egg
+        universeId: 10563114921, // Steal an egg
     },
     {
-        rootPlaceId: "124757309017950", // Ice tycoon 2
+        universeId: 10337069275, // Ice tycoon 2
     },
     {
-        rootPlaceId: "606849621", // Jailbreak
+        universeId: 245662005, // Jailbreak
     },
     {
-        rootPlaceId: "17625359962", // Rivals
+        universeId: 6035872082, // Rivals
     },
     {
-        rootPlaceId: "2753915549", // Blox fruits
+        universeId: 994732206, // Blox fruits
     },
     {
-        rootPlaceId: "537413528", // Build a boat
+        universeId: 210851291, // Build a boat
     },
 ] 

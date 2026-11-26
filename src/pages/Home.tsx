@@ -1,8 +1,12 @@
+import { useEffect } from "react";
+
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer"
 
 function Home() {
-    document.title = "Home - Islandbound Studios"
+    useEffect(() => {
+        document.title = "Home - Islandbound Studios"
+    }, [])
 
     return (
         <div className="min-h-dvh bg-neutral-950 text-white">

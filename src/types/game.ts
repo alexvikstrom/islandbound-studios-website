@@ -1,19 +1,17 @@
 export type Game = {
-    rootPlaceId: string;
+    universeId: number;
 };
 
-export type UniverseId = {
-    universeId: string;
-}
-
-export type GameCardData = Game & {
+export type GameCardData = {
+    rootPlaceId: number
     name: string;
     icon: string;
     playing: number;
     visits: number;
 };
 
-export type FeaturedGameData = Game & {
+export type FeaturedGameData = {
+    rootPlaceId: number
     name: string;
     thumbnail: string;
     playing: number;

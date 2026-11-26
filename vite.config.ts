@@ -7,11 +7,6 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      "/roblox-api": {
-        target: "https://apis.roblox.com",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/roblox-api/, "")
-      },
       "/roblox-games": {
         target: "https://games.roblox.com",
         changeOrigin: true,

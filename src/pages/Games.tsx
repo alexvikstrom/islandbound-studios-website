@@ -8,64 +8,32 @@ import AcrossOurGames from "../components/games/AcrossOurGames";
 
 import { games } from "../data/games";
 
-import type { UniverseId } from "../types/game";
 import type { GameCardData } from "../types/game";
 
 function Games() {
-    const [universeIds, setUniverseIds] = useState<UniverseId[]>([]);
-
     const [gameCards, setGameCards] = useState<GameCardData[]>([]);
 
     const [totalVisits, setTotalVisits] = useState(0);
     const [totalPlaying, setTotalPlaying] = useState(0);
 
     useEffect(() => {
-        async function fetchAllUniverseIds() {
-            try {
-                const requests = games.map(
-                    (game) => fetch(`/roblox-api/universes/v1/places/${game.rootPlaceId}/universe`)
-                )
-
-                const responses = await Promise.all(requests)
-
-                const data = await Promise.all(
-                    responses.map((response) => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error: ${response.status}`);
-                        }
-                        return response.json()
-                    })
-                )
-
-                setUniverseIds(data)
-            } catch (error) {
-                console.error(error)
-            }
-        }
-
-        fetchAllUniverseIds();
-    }, []);
-
-    useEffect(() => {
-        if (universeIds.length === 0) {
-            return;
-        }
-
         async function fetchGameCardsData() {
             try {
-                const ids = universeIds.map((game) => game.universeId).join(",");
+                const ids = games.map((game) => game.universeId).join(",");
 
-                const mainResponse = await fetch(`/roblox-games/v1/games?universeIds=${ids}`);
+                const [mainResponse, iconResponse] = await Promise.all([
+                    fetch(`/roblox-games/v1/games?universeIds=${ids}`),
+                    fetch(`roblox-thumbnails/v1/games/icons?universeIds=${ids}&size=512x512&format=Png&isCircular=false`)
+                ])
 
-                if (!mainResponse.ok) throw new Error(`HTTP error: ${mainResponse.status}`);
+                if (!mainResponse.ok) throw new Error(`Game API error: ${mainResponse.status}`);
 
-                const mainData = await mainResponse.json();
+                if (!iconResponse.ok) throw new Error(`Icon API error: ${iconResponse.status}`);
 
-                const iconResponse = await fetch(`roblox-thumbnails/v1/games/icons?universeIds=${ids}&size=512x512&format=Png&isCircular=false`)
-
-                if (!iconResponse.ok) throw new Error(`HTTP error: ${iconResponse.status}`)
-
-                const iconData = await iconResponse.json();
+                const [mainData, iconData] = await Promise.all([
+                    mainResponse.json(),
+                    iconResponse.json()
+                ])
 
                 const gameCardsData: GameCardData[] = mainData.data.map((game: any) => ({
                     rootPlaceId: String(game.rootPlaceId),
@@ -87,9 +55,11 @@ function Games() {
             }
         }
         fetchGameCardsData();
-    }, [universeIds])
+    }, [])
 
-    document.title = "Games - Islandbound Studios"
+    useEffect(() => {
+        document.title = "Games - Islandbound Studios"
+    }, [])
 
     return (
         <div className="min-h-dvh bg-neutral-950 text-white">
