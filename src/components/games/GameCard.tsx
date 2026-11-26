@@ -8,8 +8,8 @@ type GameCardProps = {
 
 function GameCard({ gameCard }: GameCardProps) {
     return (
-        <li>
-            <div className="bg-neutral-950 hover:bg-white/10 rounded-2xl h-full">
+        <li className="group">
+            <div className="bg-neutral-950 transition-colors duration-250 hover:bg-white/10 rounded-2xl h-full">
                 <a href={`https://www.roblox.com/games/${gameCard.rootPlaceId}/`} target="_blank" rel="noopener noreferrer">
                     <div className="h-full flex flex-col gap-1.5 px-3.5 py-3.5">
                         <img src={gameCard.icon} alt="" className="aspect-square rounded-2xl" />

@@ -18,6 +18,11 @@ Data storing: Data is fetched directly from Roblox's API, but an array with the 
 - What do I need to do next? I need to set up my database containing the id's of the games that will be fetched from the Roblox API, and fetch them on my games page.
 
 ### Day 2 - Date: 25.11.2026
--What have I done?
--What have I learned?
--What do I need to do next?
+- What have I done? I have made the /games page fetch and display data from the Roblox API.
+- What have I learned? I have gotten better at fetching and using data from an API.
+- What do I need to do next? I need to complete the styling of the games page.
+
+### Day 3 - Date: 26.11.2026
+- What have I done?
+- What have I learned? 
+- What do I need to do next? 

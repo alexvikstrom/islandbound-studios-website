@@ -4,6 +4,7 @@ import Header from "../components/header/Header";
 import GamesList from "../components/games/GamesList";
 import Footer from "../components/footer/Footer";
 import Divider from "../components/Divider";
+import AcrossOurGames from "../components/games/AcrossOurGames";
 
 import { games } from "../data/games";
 
@@ -14,6 +15,9 @@ function Games() {
     const [universeIds, setUniverseIds] = useState<UniverseId[]>([]);
 
     const [gameCards, setGameCards] = useState<GameCardData[]>([]);
+
+    const [totalVisits, setTotalVisits] = useState(0);
+    const [totalPlaying, setTotalPlaying] = useState(0);
 
     useEffect(() => {
         async function fetchAllUniverseIds() {
@@ -71,7 +75,13 @@ function Games() {
                     visits: game.visits
                 }));
 
-                setGameCards(gameCardsData)
+                const totalVisits = gameCardsData.reduce((total, game) => total + game.visits, 0);
+                const totalPlaying = gameCardsData.reduce((total, game) => total + game.playing, 0);
+
+                setTotalVisits(totalVisits);
+                setTotalPlaying(totalPlaying);
+
+                setGameCards(gameCardsData);
             } catch (error) {
                 console.error(error)
             }
@@ -84,30 +94,14 @@ function Games() {
     return (
         <div className="min-h-dvh bg-neutral-950 text-white">
             <Header />
-            <main className="px-8">
-                <div className="pt-6 pb-1.5">
+            <main className="px-4 py-4 md:px-8 md:py-8 2xl:px-40 2xl:py-8">
+                <div className="px-3.5">
                     <h1 className="text-4xl font-semibold">Our Games</h1>
                     <h4 className="text-lg text-neutral-400 font-normal">A portfolio of all our Roblox games</h4>
                 </div>
                 <GamesList gameCards={gameCards} />
                 <Divider />
-                <div className="py-6 flex flex-col gap-3">
-                    <div className="flex flex-col gap-2">
-                        <h2 className="text-3xl font-medium">Across Our Games</h2>
-                        <h4 className="text-xl text-neutral-400">Together, our games have reached millions of players</h4>
-                    </div>
-                    <div className="flex flex-row gap-2.5">
-                        <div className="flex flex-row items-center gap-0.5">
-                            <img src="/Visits.png" alt="" className="max-h-6 aspect-square" />
-                            <h3 className="text-2xl text-md">101,400,000,000 Total Plays</h3>
-                        </div>
-                        <div className="h-8 border-l border-neutral-600/75"></div>
-                        <div className="flex flex-row items-center gap-0.5">
-                            <img src="/ActivePlayers.png" alt="" className="max-h-6 aspect-square" />
-                            <h3 className="text-2xl text-md">1,200,000 Current Players</h3>
-                        </div>
-                    </div>
-                </div>
+                <AcrossOurGames totalVisits={totalVisits} totalPlaying={totalPlaying} />
             </main>
             <Footer />
         </div>

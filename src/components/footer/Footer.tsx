@@ -1,5 +1,3 @@
-import Divider from "../Divider";
-
 function Footer() {
     return (
         <footer className="w-full py-4 flex flex-col gap-4 bg-neutral-950 border-t border-neutral-600/40">
