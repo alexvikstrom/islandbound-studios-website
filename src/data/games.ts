@@ -6,6 +6,9 @@ export const games: Game[] = [
         universeId: 7671049560, // The forge
     },
     {
+        universeId: 9469309118, // Build a bakery
+    },
+    {
         universeId: 10563114921, // Steal an egg
     },
     {

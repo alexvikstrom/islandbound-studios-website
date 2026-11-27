@@ -12,7 +12,7 @@ function Header() {
     }
 
     return (
-        <header className="w-full px-4 py-3 bg-neutral-950/60 backdrop-blur-md border-b border-stone-600/40 flex flex-row justify-between">
+        <header className="w-full px-4 py-3 sticky top-0 z-50 bg-neutral-950/97.5 backdrop-blur-sm border-b border-stone-600/40 flex flex-row justify-between">
             <div>
                 <Link to="/" onClick={handleHeaderClick}>
                     <div className="flex flex-row gap-4">
